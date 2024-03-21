@@ -26,14 +26,11 @@ jobs:
           sudo apt-get install -y google-chrome-stable
 
       - name: Install Dependencies
-        run: npm install
-        # This assumes puppeteer is listed in your package.json dependencies
+        run: npm install puppeteer
 
       - name: Capture Screenshot
         run: node capture-screenshot.js
-        # Ensure this script captures the screenshot with transparency and cropping.
 
-      # Optional step to commit the screenshot back to the repository
       - name: Commit screenshot
         run: |
           git config --local user.email "action@github.com"
