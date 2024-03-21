@@ -1,9 +1,9 @@
-name: TryHackMe Badge Updater
+name: TryHackMe Badge
+
 on:
   schedule:
-    # At minute 0 past every 6th hour
     - cron: '0 */6 * * *'
-  workflow_dispatch: # This allows manual triggering of the workflow.
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -18,10 +18,15 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '14'
 
       - name: Install Dependencies
-        run: npm install puppeteer
+        run: |
+          npm install puppeteer
+
+      - name: Install Browsers
+        run: |
+          npx puppeteer install
 
       - name: Capture Screenshot
         run: node capture-screenshot.js
