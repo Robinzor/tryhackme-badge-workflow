@@ -18,19 +18,17 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '14'
 
       - name: Install Dependencies
-        run: |
-          npm install puppeteer
-
-      - name: Install Browsers
-        run: |
-          npx puppeteer install
+        run: npm install
+        # This assumes puppeteer is listed in your package.json dependencies
 
       - name: Capture Screenshot
         run: node capture-screenshot.js
+        # Ensure this script captures the screenshot with transparency and cropping.
 
+      # Optional step to commit the screenshot back to the repository
       - name: Commit screenshot
         run: |
           git config --local user.email "action@github.com"
