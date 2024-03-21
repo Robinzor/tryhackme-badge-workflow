@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 
 (async () => {
-  const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
+  const browser = await puppeteer.launch({ executablePath: '/usr/bin/google-chrome', args: ['--no-sandbox', '--disable-setuid-sandbox'] });
   const page = await browser.newPage();
 
   await page.setContent(`<html><body><script src="https://tryhackme.com/badge/1604750"></script></body></html>`, { waitUntil: 'networkidle0' });
