@@ -1,6 +1,9 @@
-name: Convert HTML to SVG
-
+name: TryHackMe Badge Updater
 on:
+  schedule:
+    # At minute 0 past every 6th hour
+    - cron: '0 */6 * * *'
+  workflow_dispatch: # This allows manual triggering of the workflow.
   push:
     branches:
       - main
@@ -10,18 +13,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: '14' # Consider using a newer version if compatible.
 
       - name: Install Dependencies
-        run: |
-          npm install puppeteer
+        run: npm install puppeteer
 
       - name: Capture Screenshot
         run: node capture-screenshot.js
 
-      # Additional steps for converting screenshot to SVG would be required
+      - name: Commit screenshot
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -f badge.png
+          git commit -m "Add generated badge screenshot" -a || echo "No changes to commit"
+          git push
