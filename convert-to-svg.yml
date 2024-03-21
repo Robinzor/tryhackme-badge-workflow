@@ -1,0 +1,27 @@
+name: Convert HTML to SVG
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install Dependencies
+        run: |
+          npm install puppeteer
+
+      - name: Capture Screenshot
+        run: node capture-screenshot.js
+
+      # Additional steps for converting screenshot to SVG would be required
