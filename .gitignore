@@ -1,0 +1,5 @@
+# Ignore node_modules
+node_modules/
+
+# Optional: ignore package-lock.json (if you don't want to commit it)
+package-lock.json
