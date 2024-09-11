@@ -20,16 +20,15 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install Google Chrome
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
-
       - name: Install Dependencies
-        run: npm install puppeteer
+        run: npm install
+
+      - name: Check Puppeteer version
+        run: npm list puppeteer
 
       - name: Capture Screenshot
-        run: node capture-screenshot.js
+        run: |
+          node capture-screenshot.js || echo "Screenshot capturing failed"
 
       - name: Commit screenshot
         run: |
