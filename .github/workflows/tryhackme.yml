@@ -20,8 +20,10 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install Dependencies
-        run: npm install
+      - name: Clean install Puppeteer
+        run: |
+          npm uninstall puppeteer-core  # Verwijder puppeteer-core als het is geïnstalleerd
+          npm install puppeteer          # Installeer alleen puppeteer
 
       - name: Check Puppeteer version
         run: npm list puppeteer
