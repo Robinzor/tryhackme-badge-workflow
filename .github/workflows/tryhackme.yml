@@ -22,9 +22,8 @@ jobs:
 
       - name: Clean install Puppeteer
         run: |
-          npm uninstall puppeteer-core  # Verwijder puppeteer-core als het is geïnstalleerd
-          npm install puppeteer          # Installeer alleen puppeteer
-
+          npm uninstall puppeteer-core  
+          npm install puppeteer
       - name: Check Puppeteer version
         run: npm list puppeteer
 
